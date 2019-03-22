@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 
 /**
  * @author ema
+ * @author Editado por Cristel Gauto y José Almada
  */
 public class ActListener implements ActionListener {
 

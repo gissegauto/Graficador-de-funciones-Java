@@ -2,25 +2,20 @@ package graficador;
 
 /**
  * @author ema
+ * @author Editado por Cristel Gauto y José Almada
  */
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Container;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.Font;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JList;
-import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
@@ -36,7 +31,6 @@ public class programa extends JFrame {
     public static graficador panel3 = new graficador();
     public static JTextField ecufield = new JTextField(), A_field = new JTextField(), B_field = new JTextField();
     public static JMenuBar barra_menu;
-    public JMenu menu, submenu;
     public JMenuItem menu_item;
     ActListener actlistener = new ActListener();
     Wheellistener wlistener = new Wheellistener();
@@ -47,97 +41,56 @@ public class programa extends JFrame {
     JList list_ec = new JList(model_ec);
     public static JComboBox combometodo;
 
+    public static void main(String[] args) {
+        programa prog = new programa();
+    }
+
     public programa() {
+        JPanel panel5 = propiedades();
+        componentes();
+        contenedores(panel5);
+    }
+
+    private JPanel propiedades() throws NumberFormatException {
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-        this.setSize(1000, 600);
+        this.setSize(1250, 700);
         this.setLocationRelativeTo(null);
-        this.setResizable(false);
-
+        this.setResizable(true);
         JPanel panel2 = new JPanel();
-        JPanel panel4 = new JPanel();
         JPanel panel5 = new JPanel();
-
         Border border = BorderFactory.createLineBorder(Color.decode("#BEBEBE"));
-        Border borde_ec = BorderFactory.createTitledBorder(border, " Ecuacion: ", 0, 0, Font.decode("BOLD"));
-
+        Border borde_ec = BorderFactory.createTitledBorder(border, " Ingrese Ecuacion: ", 0, 0, Font.decode("BOLD"));
         panel2.setBackground(Color.decode("#DCDCDC"));
         panel2.setBorder(border);
         panel3.setBorder(border);
         panel3.addMouseWheelListener(wlistener);
-        panel4.setBackground(Color.decode("#DCDCDC"));
-        panel4.setBorder(border);
         panel5.setBackground(Color.decode("#DCDCDC"));
         panel5.setBorder(borde_ec);
+        return panel5;
+    }
 
-////////////////////////////////////////Componentes////////////////////////////////////////////////////////////////////		 
+    private void componentes() {
+
         list_raiz.setVisible(true);
         list_ec.setVisible(true);
-
-        evalbutton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                if (combometodo.getSelectedItem().equals("Biseccion")) {
-                    metod.biseccion(Double.parseDouble(A_field.getText()), Double.parseDouble(B_field.getText()));
-                } else {
-                    metod.punto_fijo();
-                }
-            }
-        });
-
         JScrollPane bardesp_raiz = new JScrollPane(list_raiz), bardesp_ec = new JScrollPane(list_ec);
         bardesp_raiz.setPreferredSize(new Dimension(150, 150));
         bardesp_ec.setPreferredSize(new Dimension(150, 150));
-
-        JLabel B_Lab = new JLabel(" hasta "), A_Lab = new JLabel(" Desde ");
-
-        combometodo = new JComboBox();
-        combometodo.addItem("Biseccion");
-        combometodo.addItem("Punto Fijo");
-
         ecufield.setPreferredSize(new Dimension(800, 30));
         A_field.setPreferredSize(new Dimension(20, 30));
         B_field.setPreferredSize(new Dimension(20, 30));
-
         grafbutton.addActionListener(actlistener);
-
         barra_menu = new JMenuBar();
+    }
 
-        menu = new JMenu("Opciones");
-        menu.setMnemonic(KeyEvent.VK_A);
-        menu.getAccessibleContext().setAccessibleDescription("hola");
-
-        menu_item = new JMenuItem("Ayuda", KeyEvent.VK_T);
-
-        menu.add(menu_item);
-        submenu = new JMenu("-----");
-        menu_item = new JMenuItem("----");
-        submenu.add(menu_item);
-        menu.add(submenu);
-        barra_menu.add(menu);
-
-/////////////////////////////////////////////Contenedores//////////////////////////////////////////////////////////////////////////////	
-        panel2.add(bardesp_ec, BorderLayout.CENTER);
-
+    private void contenedores(JPanel panel5) {
         Box caja = Box.createVerticalBox(), caja2 = Box.createHorizontalBox();
-        caja.add(bardesp_raiz);
-        caja.add(combometodo);
-        caja2.add(A_Lab);
-        caja2.add(A_field, new FlowLayout());
-        caja2.add(B_Lab);
-        caja2.add(B_field, new FlowLayout());
-        caja.add(caja2);
-        caja.add(evalbutton);
-        panel4.add(caja);
-
         panel5.add(ecufield, BorderLayout.WEST);
         panel5.add(grafbutton, BorderLayout.EAST);
-
         Container contentpane = this.getContentPane();
         contentpane.add(barra_menu, BorderLayout.PAGE_START);
-        contentpane.add(panel2, BorderLayout.WEST);
         contentpane.add(panel3, BorderLayout.CENTER);
-        contentpane.add(panel4, BorderLayout.EAST);
         contentpane.add(panel5, BorderLayout.PAGE_END);
-
         this.setVisible(true);
     }
 
@@ -152,10 +105,6 @@ public class programa extends JFrame {
             panel3.f = true;
         }
         panel3.repaint();
-    }
-
-    public static void main(String[] args) {
-        programa prog = new programa();
     }
 
 }

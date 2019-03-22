@@ -2,6 +2,7 @@ package graficador;
 
 /**
  * @author ema
+ * @author Editado por Cristel Gauto y José Almada
  */
 import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;

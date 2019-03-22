@@ -2,6 +2,7 @@ package graficador;
 
 /**
  * @author ema
+ * @author Editado por Cristel Gauto y José Almada
  */
 import java.awt.Color;
 import java.awt.Graphics;
@@ -15,7 +16,7 @@ public class graficador extends JPanel {
     private int ANCHO, CENV, CENH, LARGO;
     private int y1, y2;
     private double x1, x2, y;
-    public static double zoom = 1;
+    public static double zoom = 50;
     public static Are are = new Are();
     double resultado;
 
@@ -24,9 +25,6 @@ public class graficador extends JPanel {
 
     @Override
     public void paint(Graphics g) {
-        //double l;
-        //l=are.f(0.03125,"4+(x^2)+4", 0);
-        //System.out.println(l);
         super.paint(g);
         Graphics2D g2d = (Graphics2D) g;
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
@@ -35,7 +33,7 @@ public class graficador extends JPanel {
         CENV = this.getHeight() / 2;
         CENH = this.getWidth() / 2;
 
-        g.setColor(Color.RED);
+        g.setColor(Color.BLACK);
         g.drawLine(0, CENV, ANCHO, CENV);
         g.drawLine(CENH, 0, CENH, LARGO);
 
@@ -49,7 +47,10 @@ public class graficador extends JPanel {
         return resultado;
     }
 
-    public int getx(double x) {//devuelve la coordenada relativa en el mapa
+    /**
+     * devuelve la coordenada relativa en el mapa
+     */
+    public int getx(double x) {
         return (int) ((x * zoom) + CENH);
     }
 
@@ -63,9 +64,9 @@ public class graficador extends JPanel {
             //if(y<0)System.out.println(x2);
 
             y2 = (int) (CENV - (y * zoom));
-// si molesta como grafica la tangete, grafica punto por punto
-            //g.drawLine(getx(x1), y1, getx(x1), y1);
-             g.drawLine(getx(x1), y1, getx(x2), y2);
+            // si molesta como grafica la tangete, grafica punto por punto
+            g.drawLine(getx(x1), y1, getx(x1), y1);
+            // g.drawLine(getx(x1), y1, getx(x2), y2);
 
             x1 = x2;
             y1 = y2;

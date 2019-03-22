@@ -5,10 +5,11 @@ Le puse Are por "Analisis recursivo de ecuaciones"
  */
 /**
  * @author ema
+ * @author Editado por Cristel Gauto y José Almada
  */
 public class Are {
 
-    public double f(double valor, String segmento, int salto, double parentesis) {   // cambio del algoritmo,se agrego "parentesis"
+    public double f(double valor, String segmento, int salto, double parentesis) {   
 
         int i = 0, b = 0, c = 0, z = 0;
         double x = 0;
