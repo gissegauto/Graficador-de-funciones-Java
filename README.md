@@ -1,3 +1,5 @@
+- TAREAS
+
 Algoritmo que usa recursividad para evaluar y graficar ecuaciones de una sola variable ( X )
 
 Soporta ecuaciones de una sola variable (x) y operaciones suma (+), resta (-), multiplicacion (*), division (/)
